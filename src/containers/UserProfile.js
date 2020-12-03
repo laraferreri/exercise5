@@ -4,6 +4,7 @@ import UserProfileComponent from "../components/UserProfileComponent";
 function UserProfile({ userInformation }) {
   return (
     <div>
+      <h1>User Profile</h1>
       <p>
         <strong>UID:</strong>
         {userInformation.uid}
@@ -13,10 +14,9 @@ function UserProfile({ userInformation }) {
         {userInformation.email}
       </p>
 
-      <h1>User Profile</h1>
       <UserProfileComponent userInformation={userInformation} />
     </div>
   );
 }
 
-export default UserProfile;
+export default UserProfileComponent;
