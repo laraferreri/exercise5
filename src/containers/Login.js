@@ -11,4 +11,4 @@ function Login({ LoginFunction }) {
   );
 }
 
-export default Login;
+export default LoginForm;
