@@ -1,7 +1,6 @@
 import React from "react";
-import CreateAccountForm from "../components/CreateAccountForm";
 
-function CreateAccountForm() {
+function CreateAccountForm({ CreateAccountFunction }) {
   return (
     <div>
       <form className="SignupForm" onSubmit={(e) => CreateAccountFunction(e)}>
