@@ -22,13 +22,25 @@ const firebaseConfig = {
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
-  //const [userInformation, setUserInformation] = useState();
+  const [userInformation, setUserInformation] = useState();
 
   useEffect(() => {
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
     }
   }, [firebaseConfig]);
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        setLoggedIn(true);
+        setUserInformation(user);
+      } else {
+        setLoggedIn(false);
+      }
+      setLoading(false);
+    });
+  }, []);
 
   function LoginFunction(e) {
     e.preventDefault();
@@ -47,7 +59,19 @@ function App() {
       });
   }
 
-  function LogoutFunction(e) {}
+  function LogoutFunction() {
+    firebase
+      .auth()
+      .signOut()
+      .then(function () {
+        setLoggedIn(false);
+        setUserInformation({});
+      })
+      .catch(function (error) {
+        console.log("LOGOUT ERROR", error);
+      });
+  }
+
   function CreateAccountFunction(e) {
     e.preventDefault();
     const email = e.currentTarget.createEmail.value;
@@ -67,18 +91,32 @@ function App() {
 
   console.log({ loggedIn });
 
+  if (loading) return null;
+
   return (
     <div className="App">
       <Header loggedIn={loggedIn} LogoutFunction={LogoutFunction} />
       <Router>
         <Route exact path="/login">
-          <Login LoginFunction={LoginFunction} />
+          {!loggedIn ? (
+            <Login LoginFunction={LoginFunction} />
+          ) : (
+            <Redirect to="/" />
+          )}
         </Route>
         <Route exact path="/CreateAccount">
-          <CreateAccount CreateAccountFunction={CreateAccountFunction} />
+          {!loggedIn ? (
+            <CreateAccount CreateAccountFunction={CreateAccountFunction} />
+          ) : (
+            <Redirect to="/" />
+          )}
         </Route>
         <Route exact path="/">
-          <UserProfile />
+          {!loggedIn ? (
+            <Redirect to="/login" />
+          ) : (
+            <UserProfile userInformation={userInformation} />
+          )}
         </Route>
       </Router>
     </div>
