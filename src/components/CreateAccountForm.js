@@ -4,9 +4,9 @@ function CreateAccountForm({ CreateAccountFunction }) {
   return (
     <div>
       <form className="SignupForm" onSubmit={(e) => CreateAccountFunction(e)}>
-        <label htmlFor="createEmail">Emao;</label>"
+        <label htmlFor="createEmail">Email</label>"
         <input type="email" name="createEmail" />
-        <label htmlFor="createPassword">Password</label>"
+        <label htmlFor="createPassword">Password</label>
         <input type="password" name="createPassword" />
         <button> Submit</button>
       </form>
