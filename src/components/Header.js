@@ -7,7 +7,7 @@ function Header({ loggedIn, LogoutFunction }) {
         {loggedIn ? (
           <>
             <a href="/">User Profile</a>
-            <a oneClick={() => LogoutFunction()}> Logout </a>
+            <a onClick={() => LogoutFunction()}> Logout </a>
           </>
         ) : (
           <>
