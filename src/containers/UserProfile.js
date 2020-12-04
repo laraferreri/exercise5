@@ -19,4 +19,4 @@ function UserProfile({ userInformation }) {
   );
 }
 
-export default UserProfileComponent;
+export default UserProfile;

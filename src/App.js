@@ -22,7 +22,7 @@ const firebaseConfig = {
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [userInformation, setUserInformation] = useState();
+  const [userInformation, setUserInformation] = useState({});
 
   useEffect(() => {
     if (!firebase.apps.length) {
@@ -89,7 +89,7 @@ function App() {
       });
   }
 
-  console.log({ loggedIn });
+  console.log({ userInformation });
 
   if (loading) return null;
 
